@@ -1,0 +1,10 @@
+# build output (dist/TicTacToe.apk is kept on purpose)
+build/
+*.idsig
+
+# signing key - keep a private backup, never commit it
+*.keystore
+*.jks
+
+# local tooling
+.claude/
