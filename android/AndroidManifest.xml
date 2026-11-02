@@ -12,7 +12,7 @@
         android:anyDensity="true" />
 
     <application
-        android:label="Tic Tac Toe"
+        android:label="Tic-Tac-Toy : Ads free game by Kunal"
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher"
         android:allowBackup="true"
@@ -21,6 +21,7 @@
 
         <activity
             android:name=".MainActivity"
+            android:label="Tic-Tac-Toy"
             android:exported="true"
             android:launchMode="singleTask"
             android:screenOrientation="unspecified"

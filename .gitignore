@@ -2,9 +2,16 @@
 build/
 *.idsig
 
-# signing key - keep a private backup, never commit it
+# Play Store upload file - rebuilt by build-apk.ps1
+dist/*.aab
+
+# signing key + its password - keep a private backup, never commit them
 *.keystore
 *.jks
+keystore.properties
+
+# downloaded build tools (bundletool)
+tools/bin/
 
 # local tooling
 .claude/
