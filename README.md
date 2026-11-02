@@ -17,9 +17,10 @@ Download [`dist/TicTacToe.apk`](dist/TicTacToe.apk), open it on the device and a
 | `web/` | The game: `index.html` (UI) and `game.js` (rules and computer player) |
 | `android/` | Android wrapper: manifest, resources, `MainActivity.java` (WebView) |
 | `tests/` | Logic tests: `node tests/game.test.js` |
-| `tools/` | `serve.js` (local preview server), `make-icons.ps1` (launcher + store icons from `art/icon-source.jpg`) |
+| `tools/` | `serve.js` (local preview server), `make-icons.ps1` (launcher + store icons from `art/icon-source.jpg`), `screenshots.js` (store screenshots) |
 | `art/` | `icon-source.jpg`, the picture every icon is made from |
-| `store/` | Play Store listing images: 512x512 icon, 1024x500 feature graphic |
+| `store/` | Google Play listing: `listing.md` (texts and form answers), icon, feature graphic, `screenshots/` |
+| `docs/` | `privacy-policy.html`, published with GitHub Pages |
 | `build-apk.ps1` | Builds and signs `dist/TicTacToe.apk` (direct install) and `dist/TicTacToy.aab` (Google Play upload) |
 
 ## Build
@@ -39,6 +40,15 @@ Raise `$VersionCode` (and `$VersionName`) in `build-apk.ps1` before every Play S
 `android/upload.keystore` and its password file `android/keystore.properties` stay on your PC and are never committed.
 **Back up both files somewhere safe** (e.g. a USB stick and a private cloud folder): every Play Store update must be
 signed with this same upload key. If both are missing, the script creates a new key with a random password.
+
+## Publishing on Google Play
+
+Everything to copy into the Play Console is in [`store/listing.md`](store/listing.md).
+
+- **Privacy policy:** on GitHub, open the repository's Settings → Pages, choose *Deploy from a branch*, branch `main`,
+  folder `/docs`. The policy is then at https://kmahendra999.github.io/Tic-Tac-Toe/privacy-policy.html
+  (the repository must be public).
+- **Screenshots:** `node tools/screenshots.js` re-captures them after UI changes (needs Chrome or Edge).
 
 ## Play in a browser
 

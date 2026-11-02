@@ -1,0 +1,93 @@
+# Google Play listing - Tic-Tac-Toy by Kunal
+
+Copy-paste text for the Play Console. Limits are Google's; character counts are checked.
+
+## Main store listing
+
+**App name** (30 max)
+
+```
+Tic-Tac-Toy by Kunal
+```
+
+**Short description** (80 max)
+
+```
+Ads-free Tic Tac Toe! Play a friend or the computer at 5 levels. No tracking.
+```
+
+**Full description** (4000 max)
+
+```
+Tic-Tac-Toy is a simple, colourful Tic Tac Toe game made by Kunal - with no ads, no pop-ups and no tracking. Just tap and play.
+
+THREE WAYS TO PLAY
+• You vs Computer - test yourself against the computer
+• 2 Players - pass the phone or tablet and play a friend
+• Computer vs Computer - sit back and watch two computers battle it out
+
+FIVE DIFFICULTY LEVELS
+Easy, Normal, Medium, Hard and Impossible. Start easy and work your way up - can you beat the computer on Hard? On Impossible, the best you can hope for is a draw!
+You can change the level from the menu or right in the middle of a game.
+
+MADE FOR EVERYONE
+• Bold black, blue and yellow design that is easy on the eyes
+• Works on phones and tablets, in portrait and landscape
+• Score board for X, O and draws
+• Sound and vibration you can switch on or off
+• Menu labels in English and Hindi
+• Works completely offline - no internet needed
+
+100% ADS-FREE AND PRIVATE
+No ads. No in-app purchases. No sign-in. No data collected. The app does not even ask for internet access.
+
+Made with ❤ by Kunal.
+```
+
+## Graphics (files in this folder)
+
+| Field | File |
+| --- | --- |
+| App icon (512x512) | `play-icon-512.png` |
+| Feature graphic (1024x500) | `feature-graphic-1024x500.png` |
+| Phone screenshots | `screenshots/phone-*.png` |
+| 7-inch tablet screenshots | `screenshots/tablet7-*.png` |
+| 10-inch tablet screenshots | `screenshots/tablet10-*.png` |
+
+## Store settings
+
+- **App or game:** Game
+- **Category:** Board
+- **Tags:** Board, Casual, Offline, Single player, Multiplayer (local)
+- **Free or paid:** Free
+- **Contact email:** k.mahendra999@hotmail.com
+- **Privacy policy URL:** https://kmahendra999.github.io/Tic-Tac-Toe/privacy-policy.html
+  (works once GitHub Pages is on for the repository - see README)
+
+## App content answers (Policy > App content)
+
+| Section | Answer |
+| --- | --- |
+| Privacy policy | URL above |
+| Ads | **No**, the app does not contain ads |
+| App access | All functionality is available without special access (no login) |
+| Content rating | Category: Game. Answer **No** to every violence, fear, sexuality, language, drugs, gambling and user-interaction question. Expected rating: Everyone / PEGI 3 / IARC 3+ |
+| Target audience | Ages 6-8, 9-12, 13-15, 16-17, 18+ (including children means Google's Families policy applies - the app already meets it: no ads, no data collection) |
+| Data safety | **Does your app collect or share any of the required user data types? → No.** Settings and scores stay on the device and are never sent anywhere |
+| Government apps | No |
+| Financial features | No |
+| Health | No |
+| News app | No |
+
+## Release
+
+- Upload: `dist/TicTacToy.aab` (built by `build-apk.ps1`)
+- App signing: keep **"Let Google manage and protect your app signing key"** (`android/upload.keystore` is the upload key)
+- Release name: `1 (1.0)`
+- Release notes:
+
+```
+First release of Tic-Tac-Toy by Kunal - ads-free Tic Tac Toe with 3 game modes and 5 difficulty levels.
+```
+
+- New personal developer accounts: run a **closed test with at least 12 testers for 14 days** before applying for production.
