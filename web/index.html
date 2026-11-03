@@ -736,7 +736,7 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;touch-
     $('scoreO').classList.toggle('turn', !over && turn === 'O');
   }
 
-  // g is the server's view of the game (see server/api.php view()).
+  // g is the server's view of the game (see view() in server/worker.mjs).
   function onlineRender(g) {
     if (g.id !== OL.id) { OL.id = g.id; OL.done = false; OL.gone = false; S.over = false; clearBoard(); }
     for (var i = 0; i < 9; i++) {

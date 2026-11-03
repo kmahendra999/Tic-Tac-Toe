@@ -1,11 +1,11 @@
 /* Tic-Tac-Toy online play: guest or animal players, friend codes and random matches.
-   Talks to server/api.php; the board itself is drawn by index.html through window.TTTUI.
+   Talks to server/worker.mjs; the board itself is drawn by index.html through window.TTTUI.
    Pages use big pictures and few words so small children can find their way. */
 (function () {
   'use strict';
 
-  // Address of server/api.php on the web host. For testing, open the game once with ?server=<url> (it is remembered).
-  var SERVER = '';
+  // The online server (server/worker.mjs on Cloudflare). For testing, open the game once with ?server=<url> (it is remembered).
+  var SERVER = 'https://androidapps.vidiaplus.com/tictactoy/api';
 
   var ANIMALS = [
     ['tiger', '🐯', 'Tiger'], ['lion', '🦁', 'Lion'], ['panda', '🐼', 'Panda'], ['puppy', '🐶', 'Puppy'],

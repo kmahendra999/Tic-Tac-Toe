@@ -1,16 +1,14 @@
-/* Online server tests: starts server/api.php on PHP's built-in web server with a throw-away SQLite
-   database and plays through accounts, friend codes, random matches, wins, rematches and leaving.
-   Run: node tests/server.test.js   (needs PHP 7.4+ with pdo_sqlite; set PHP=path\to\php.exe if not on PATH) */
+/* Online server tests: plays through accounts, friend codes, random matches, wins, rematches and leaving.
+   Run: node tests/server.test.js
+     - by default starts server/local.mjs (the Worker on Node, fresh in-memory database)
+     - TTT_URL=https://androidapps.vidiaplus.com/tictactoy/api tests the live server and deletes its test players after */
 'use strict';
 const { spawn } = require('child_process');
-const fs = require('fs');
-const os = require('os');
 const path = require('path');
 
-const PHP = process.env.PHP || 'php';
 const PORT = 8765;
-const URL = `http://127.0.0.1:${PORT}/api.php`;
-const DB = path.join(os.tmpdir(), `ttt-test-${process.pid}.sqlite`);
+const REMOTE = process.env.TTT_URL || '';
+const URL = REMOTE || `http://127.0.0.1:${PORT}/tictactoy/api`;
 
 let failures = 0, passed = 0;
 function check(name, cond, extra) {
@@ -33,11 +31,9 @@ async function play(game, moves) {
 }
 
 async function main() {
-  // PHP on Windows needs its SQLite driver switched on explicitly when there is no php.ini
-  const ext = path.join(path.dirname(PHP), 'ext');
-  const args = fs.existsSync(ext) ? ['-d', `extension_dir=${ext}`, '-d', 'extension=pdo_sqlite'] : [];
-  const server = spawn(PHP, [...args, '-S', `127.0.0.1:${PORT}`, '-t', path.join(__dirname, '..', 'server')],
-    { env: { ...process.env, TTT_SQLITE: DB }, stdio: 'ignore' });
+  const server = REMOTE ? null
+    : spawn(process.execPath, [path.join(__dirname, '..', 'server', 'local.mjs'), String(PORT)], { stdio: 'ignore' });
+  const leftovers = [];   // tokens of test players still alive at the end
   try {
     for (let i = 0; i < 50; i++) {
       try { await fetch(URL); break; } catch (e) { await new Promise((r) => setTimeout(r, 100)); }
@@ -80,7 +76,9 @@ async function main() {
     const gid = j.game.id;
     const pa = await api('poll', { token: A2, game: gid });
     check('inviter sees the friend arrive', pa.game.status === 'playing' && pa.game.you === 'X' && pa.game.opp.animal === 'bunny', pa);
-    check('code cannot be used twice', (await api('join', { token: (await api('guest')).token, code: inv.game.code })).error === 'nocode');
+    const late = await api('guest');
+    leftovers.push(late.token);
+    check('code cannot be used twice', (await api('join', { token: late.token, code: inv.game.code })).error === 'nocode');
 
     console.log('moves');
     let g = (await api('move', { token: B, game: gid, cell: 0 })).game;
@@ -120,23 +118,28 @@ async function main() {
     await api('leave', { token: B, game: r1.game.id });
     check('leaving tells the other player', (await api('poll', { token: A2, game: r1.game.id })).game.status === 'gone');
     const other = await api('guest');
+    leftovers.push(other.token);
     check('players cannot peek at other games', (await api('poll', { token: other.token, game: r1.game.id })).error === 'nogame');
 
     console.log('logout + delete');
     const gst = await api('guest');
     await api('logout', { token: gst.token });
     check('guest logout removes the guest', (await api('me', { token: gst.token })).status === 401);
-    await api('logout', { token: A2 });
-    check('player logout ends the session', (await api('me', { token: A2 })).status === 401);
+    leftovers.push(A2);
+    const c = await api('signup', { color: 'green', animal: 'frog', pin: '5555' });
+    await api('logout', { token: c.token });
+    check('player logout ends the session', (await api('me', { token: c.token })).status === 401);
+    const cBack = await api('login', { color: 'green', animal: 'frog', num: c.me.num, pin: '5555' });
+    check('player can log back in after logout', cBack.ok && cBack.token, cBack);
+    if (cBack.token) leftovers.push(cBack.token);
     const del = await api('delete', { token: B });
     check('delete my player', del.ok && (await api('me', { token: B })).status === 401, del);
     check('deleted player cannot log in',
       (await api('login', { color: 'pink', animal: 'bunny', num: b.me.num, pin: '4321' })).error === 'wrong');
     check('junk request refused', (await api('nothing')).error === 'bad');
   } finally {
-    server.kill();
-    await new Promise((r) => setTimeout(r, 300));
-    try { fs.unlinkSync(DB); } catch (e) { /* already gone */ }
+    for (const token of leftovers) await api('delete', { token }).catch(() => {});
+    if (server) server.kill();
   }
   console.log(`\n${passed} passed, ${failures} failed`);
   process.exit(failures ? 1 : 0);

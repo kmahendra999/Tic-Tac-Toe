@@ -34,7 +34,7 @@ a{color:var(--blue)}
   <p>If you choose <strong>Play Online</strong>, the app talks to our game server. The server stores only:</p>
   <ul>
     <li><strong>A made-up game name:</strong> a colour, an animal and a number (for example "Blue Tiger 27"). Players pick from fixed pictures; nobody types a real name. Guests get a random game name.</li>
-    <li><strong>A secret 4-number PIN</strong> (only for players who make a player, not guests). It is stored scrambled (hashed), so nobody can read it, not even us.</li>
+    <li><strong>A secret 4-number PIN</strong> (only for players who make a player, not guests). It is stored scrambled (hashed), never as the plain number, and 5 wrong tries lock the player for 15 minutes.</li>
     <li><strong>A sign-in code</strong> for your device, so you stay signed in.</li>
     <li><strong>Your games:</strong> moves, wins, losses and draws, invite codes, and the emoji reactions you tap (from a fixed list of 5 emoji - there is no typing or chat).</li>
   </ul>

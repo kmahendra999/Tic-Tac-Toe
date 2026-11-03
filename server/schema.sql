@@ -1,0 +1,27 @@
+-- Tic-Tac-Toy online server tables (Cloudflare D1 / SQLite). Times are Unix seconds.
+CREATE TABLE IF NOT EXISTS ttt_users (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  color TEXT NOT NULL, animal TEXT NOT NULL, num INTEGER NOT NULL,
+  pin_hash TEXT NULL, token_hash TEXT NULL, guest INTEGER NOT NULL DEFAULT 0,
+  wins INTEGER NOT NULL DEFAULT 0, losses INTEGER NOT NULL DEFAULT 0, draws INTEGER NOT NULL DEFAULT 0,
+  fails INTEGER NOT NULL DEFAULT 0, locked_until INTEGER NOT NULL DEFAULT 0,
+  created INTEGER NOT NULL, seen INTEGER NOT NULL,
+  UNIQUE (color, animal, num)
+);
+
+CREATE TABLE IF NOT EXISTS ttt_games (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  kind TEXT NOT NULL, code TEXT NULL,
+  x_id INTEGER NOT NULL, o_id INTEGER NULL,
+  board TEXT NOT NULL DEFAULT '.........', turn TEXT NOT NULL DEFAULT 'X',
+  status TEXT NOT NULL, winner TEXT NULL, line TEXT NULL, ver INTEGER NOT NULL DEFAULT 0,
+  x_seen INTEGER NOT NULL DEFAULT 0, o_seen INTEGER NOT NULL DEFAULT 0,
+  emo_x INTEGER NOT NULL DEFAULT -1, emo_x_n INTEGER NOT NULL DEFAULT 0,
+  emo_o INTEGER NOT NULL DEFAULT -1, emo_o_n INTEGER NOT NULL DEFAULT 0,
+  again_x INTEGER NOT NULL DEFAULT 0, again_o INTEGER NOT NULL DEFAULT 0,
+  next_id INTEGER NULL, created INTEGER NOT NULL, updated INTEGER NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS ttt_users_token ON ttt_users (token_hash);
+CREATE INDEX IF NOT EXISTS ttt_games_find ON ttt_games (status, kind);
+CREATE INDEX IF NOT EXISTS ttt_games_code ON ttt_games (code);

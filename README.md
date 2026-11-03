@@ -5,7 +5,8 @@ A 3x3 Tic Tac Toe game for Android phones and tablets, in black, blue and yellow
 - **Modes:** Player vs Computer, 2 Players, Computer vs Computer, Play Online
 - **Difficulty:** 5 levels (Easy, Normal, Medium, Hard, Impossible), adjustable from the menu or during play
 - **Online:** play as a guest or make an animal player with a 4-number PIN; invite a friend with a code or play anyone;
-  emoji reactions, no chat. Needs the small PHP server in [`server/`](server/README.md)
+  emoji reactions, no chat. Server: a Cloudflare Worker + D1 in [`server/`](server/README.md), live at
+  https://androidapps.vidiaplus.com/tictactoy/api
 - **Extras:** score tracking, sound, vibration, portrait and landscape layouts
 
 ## Install
@@ -17,9 +18,9 @@ Download [`dist/TicTacToe.apk`](dist/TicTacToe.apk), open it on the device and a
 | Path | Contents |
 | --- | --- |
 | `web/` | The game: `index.html` (UI), `game.js` (rules and computer player), `online.js` (online play) |
-| `server/` | Online game server for cPanel: `api.php` + MySQL - setup in [`server/README.md`](server/README.md) |
+| `server/` | Online game server: Cloudflare Worker `worker.mjs` + D1 `schema.sql`, `deploy.mjs` - see [`server/README.md`](server/README.md) |
 | `android/` | Android wrapper: manifest, resources, `MainActivity.java` (WebView + share sheet for invite codes) |
-| `tests/` | `node tests/game.test.js` (game logic), `node tests/server.test.js` (online server, needs PHP) |
+| `tests/` | `node tests/game.test.js` (game logic), `node tests/server.test.js` (online server) |
 | `tools/` | `serve.js` (local preview server), `make-icons.ps1` (launcher + store icons from `art/icon-source.jpg`), `screenshots.js` (store screenshots) |
 | `art/` | `icon-source.jpg`, the picture every icon is made from |
 | `store/` | Google Play listing: `listing.md` (texts and form answers), icon, feature graphic, `screenshots/` |
