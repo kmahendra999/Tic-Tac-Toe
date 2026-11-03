@@ -2,8 +2,10 @@
 
 A 3x3 Tic Tac Toe game for Android phones and tablets, in black, blue and yellow. No ads, no tracking.
 
-- **Modes:** Player vs Computer, 2 Players, Computer vs Computer
+- **Modes:** Player vs Computer, 2 Players, Computer vs Computer, Play Online
 - **Difficulty:** 5 levels (Easy, Normal, Medium, Hard, Impossible), adjustable from the menu or during play
+- **Online:** play as a guest or make an animal player with a 4-number PIN; invite a friend with a code or play anyone;
+  emoji reactions, no chat. Needs the small PHP server in [`server/`](server/README.md)
 - **Extras:** score tracking, sound, vibration, portrait and landscape layouts
 
 ## Install
@@ -14,13 +16,14 @@ Download [`dist/TicTacToe.apk`](dist/TicTacToe.apk), open it on the device and a
 
 | Path | Contents |
 | --- | --- |
-| `web/` | The game: `index.html` (UI) and `game.js` (rules and computer player) |
-| `android/` | Android wrapper: manifest, resources, `MainActivity.java` (WebView) |
-| `tests/` | Logic tests: `node tests/game.test.js` |
+| `web/` | The game: `index.html` (UI), `game.js` (rules and computer player), `online.js` (online play) |
+| `server/` | Online game server for cPanel: `api.php` + MySQL - setup in [`server/README.md`](server/README.md) |
+| `android/` | Android wrapper: manifest, resources, `MainActivity.java` (WebView + share sheet for invite codes) |
+| `tests/` | `node tests/game.test.js` (game logic), `node tests/server.test.js` (online server, needs PHP) |
 | `tools/` | `serve.js` (local preview server), `make-icons.ps1` (launcher + store icons from `art/icon-source.jpg`), `screenshots.js` (store screenshots) |
 | `art/` | `icon-source.jpg`, the picture every icon is made from |
 | `store/` | Google Play listing: `listing.md` (texts and form answers), icon, feature graphic, `screenshots/` |
-| `docs/` | `privacy-policy.html`, published with GitHub Pages |
+| `docs/` | `privacy-policy.html` and `delete-account.html`, published with GitHub Pages |
 | `build-apk.ps1` | Builds and signs `dist/TicTacToe.apk` (direct install) and `dist/TicTacToy.aab` (Google Play upload) |
 
 ## Build

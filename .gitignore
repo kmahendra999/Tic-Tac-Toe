@@ -10,6 +10,10 @@ dist/*.aab
 *.jks
 keystore.properties
 
+# online server: real database password and local test database
+server/config.php
+server/data/
+
 # downloaded build tools (bundletool)
 tools/bin/
 

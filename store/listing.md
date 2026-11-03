@@ -79,6 +79,25 @@ Made with ❤ by Kunal.
 | Health | No |
 | News app | No |
 
+## Version 1.1 (online play) - update these when releasing it
+
+Version 1.0 is offline; the answers above are for 1.0. When 1.1 goes out, change these in Policy → App content:
+
+| Section | New answer for 1.1 |
+| --- | --- |
+| Privacy policy | Same URL - the page already describes online play |
+| Data safety → collects data? | **Yes**. Encrypted in transit: **Yes**. Users can ask for deletion: **Yes** |
+| Data safety → data types | **Personal info → User IDs** (made-up game name + sign-in code) and **App activity → Other user-generated content** (moves, emoji taps). Purpose: **App functionality**. Not shared. Required for online play only |
+| Data safety → delete account URL | https://kmahendra999.github.io/Tic-Tac-Toe/delete-account.html |
+| Content rating | Re-take: **Users can interact: Yes** (only fixed emoji, no chat, no free text); shares location: No; digital purchases: No |
+| Target audience | Unchanged; Families policy: no ads, no personal data, no chat, players pick names from pictures |
+
+Full description - add to "THREE WAYS TO PLAY":
+
+```
+• Play Online - invite a friend with a 4-number code, or play anyone. Pick an animal player, no email needed. No chat: just fun emoji 👋👍😮😂🎉
+```
+
 ## Release
 
 - Upload: `dist/TicTacToy.aab` (built by `build-apk.ps1`)

@@ -160,6 +160,60 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;touch-
 .btn.warn{border-color:var(--yellow);color:var(--yellow)}
 .hidden{display:none !important}
 
+/* ---------- online ---------- */
+.mode .ic.globe{font-size:26px;width:48px;justify-content:center}
+.on-wrap{width:100%;max-width:540px;margin:auto 0;display:flex;flex-direction:column;gap:14px;padding:4px 0}
+.on-head{display:flex;align-items:center;gap:10px}
+.on-head b{flex:1;text-align:center;font-size:18px;font-weight:900;margin-right:52px}
+.on-title{text-align:center;font-size:clamp(22px,6.5vw,30px);font-weight:900;line-height:1.2}
+.on-sub{text-align:center;color:var(--muted);font-size:15px;margin-top:-8px}
+.hero{font-size:72px;text-align:center;line-height:1.1}
+.big-btn{display:flex;align-items:center;gap:16px;width:100%;padding:16px 18px;border-radius:20px;text-align:left;
+  background:#0a0e15;border:3px solid var(--line);font-size:36px;line-height:1}
+.big-btn b{display:block;font-size:21px;line-height:1.2}
+.big-btn small{display:block;font-size:14px;color:var(--muted);margin-top:3px;line-height:1.25}
+.big-btn.blue{border-color:var(--blue)} .big-btn.yellow{border-color:var(--yellow)} .big-btn.green{border-color:#3ccf6e}
+.big-btn:active{transform:scale(.97)}
+.pick-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.pick{aspect-ratio:1;border-radius:20px;background:#0a0e15;border:3px solid var(--line);
+  font-size:clamp(34px,10vw,52px);display:flex;align-items:center;justify-content:center}
+.pick.color{border:4px solid rgba(255,255,255,.18);background:var(--c);border-radius:50%}
+.pick:active{transform:scale(.92)}
+.ava{display:inline-flex;align-items:center;justify-content:center;width:var(--s,56px);height:var(--s,56px);border-radius:50%;
+  background:var(--c);font-size:calc(var(--s,56px) * .6);flex:none;box-shadow:0 0 0 3px rgba(255,255,255,.18)}
+.me-card{display:flex;align-items:center;gap:14px}
+.me-card .nm{font-size:20px;font-weight:900;line-height:1.2}
+.me-card .stats{color:var(--muted);font-size:15px;margin-top:3px}
+.tag{font-size:12px;font-weight:800;padding:2px 8px;border-radius:8px;background:#273246;color:var(--muted);vertical-align:middle}
+.you-card{display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center}
+.you-card .nm{font-size:26px;font-weight:900}
+.secret{font-size:18px} .secret b{font-size:30px;letter-spacing:.12em;color:var(--yellow)}
+.digits{display:flex;justify-content:center;gap:12px}
+.digits span{width:56px;height:68px;border-radius:14px;border:3px solid var(--line);display:flex;align-items:center;justify-content:center;
+  font-size:36px;font-weight:900;background:#0a0e15}
+.digits span.on{border-color:var(--yellow);color:var(--yellow)}
+.keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.keypad button{height:62px;border-radius:16px;background:var(--panel2);border:2px solid var(--line);font-size:28px;font-weight:800}
+.keypad button:active{transform:scale(.94)}
+.keypad .ok{background:linear-gradient(90deg,var(--blue-hi),var(--yellow));color:#0b0d12;border:0}
+.code-big{font-size:clamp(60px,19vw,92px);font-weight:900;letter-spacing:.14em;text-align:center;color:var(--yellow);line-height:1}
+.oops{background:rgba(255,90,90,.12);border:2px solid #ff5a5a;color:#ffc2c2;border-radius:14px;padding:10px 14px;text-align:center;font-weight:700}
+.links{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
+.link{padding:10px 14px;border-radius:12px;color:var(--muted);font-size:14px;font-weight:700;border:1px solid var(--line)}
+.spin{font-size:64px;text-align:center;animation:bob 1s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-10px) rotate(8deg)}}
+.emoji-bar{display:flex;justify-content:center;gap:8px}
+.emoji-bar button{flex:1;max-width:76px;height:56px;border-radius:16px;background:var(--panel2);border:1px solid var(--line);font-size:28px}
+.emoji-bar button:active{transform:scale(.9)}
+.emoji-pop{position:absolute;left:50%;top:50%;pointer-events:none;opacity:0;text-align:center;line-height:1;
+  font-size:calc(var(--bs) * .3);transform:translate(-50%,-50%) scale(.3)}
+.emoji-pop small{display:block;font-size:15px;font-weight:800;margin-top:6px;color:var(--text);text-shadow:0 1px 4px #000}
+.emoji-pop.show{animation:pop 1.8s ease-out forwards}
+@keyframes pop{15%{opacity:1;transform:translate(-50%,-50%) scale(1.1)}70%{opacity:1;transform:translate(-50%,-60%) scale(1)}
+  100%{opacity:0;transform:translate(-50%,-85%) scale(.9)}}
+.result-card .btn{width:100%;margin-top:8px}
+.result-card .primary:disabled{opacity:.6}
+
 /* tablets & landscape: board left, panel right */
 @media (orientation:landscape) and (min-width:640px){
   :root{--bs:min(calc(100vh - 140px), 56vw, 680px)}
@@ -201,6 +255,8 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;touch-
           <span><b>2 Players</b><small>दो खिलाड़ी · एक ही फ़ोन पर</small></span><span class="tick"></span></button>
         <button class="mode" data-mode="cvc"><span class="ic" data-ic="XO"></span>
           <span><b>Computer vs Computer</b><small>कंप्यूटर बनाम कंप्यूटर · देखें</small></span><span class="tick"></span></button>
+        <button class="mode" data-mode="online"><span class="ic globe">🌍</span>
+          <span><b>Play Online</b><small>दोस्तों के साथ ऑनलाइन</small></span><span class="tick"></span></button>
       </div>
     </div>
 
@@ -216,6 +272,11 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;touch-
 
     <button class="primary" id="startBtn">START · शुरू करें</button>
   </div>
+</section>
+
+<!-- ============ ONLINE (pages drawn by online.js) ============ -->
+<section id="online" class="screen">
+  <div class="on-wrap" id="onlinePage"></div>
 </section>
 
 <!-- ============ GAME ============ -->
@@ -239,8 +300,10 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;touch-
               <div class="big" id="resultBig"></div>
               <div class="sub" id="resultSub"></div>
               <button class="primary" id="againBtn">PLAY AGAIN · फिर खेलें</button>
+              <button class="btn hidden" id="homeBtn">🏠 Home · होम</button>
             </div>
           </div>
+          <div class="emoji-pop" id="emojiPop"></div>
         </div>
       </div>
 
@@ -256,6 +319,7 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;touch-
           <button class="btn" id="pauseBtn">⏸ Pause</button>
           <button class="btn warn" id="resetBtn">⟲ Reset Score</button>
         </div>
+        <div class="emoji-bar hidden" id="emojiBar"></div>
       </aside>
     </div>
   </div>
@@ -268,7 +332,7 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;touch-
 
   var XSVG = '<svg viewBox="0 0 100 100" class="mark x"><path d="M24 24 L76 76"/><path d="M76 24 L24 76"/></svg>';
   var OSVG = '<svg viewBox="0 0 100 100" class="mark o"><circle cx="50" cy="50" r="27"/></svg>';
-  var MODE_TITLE = { pvc: 'You vs Computer', pvp: '2 Players', cvc: 'Computer vs Computer' };
+  var MODE_TITLE = { pvc: 'You vs Computer', pvp: '2 Players', cvc: 'Computer vs Computer', online: 'Play Online' };
   var NAMES = {
     pvc: { X: 'You', O: 'Computer' },
     pvp: { X: 'Player 1', O: 'Player 2' },
@@ -366,8 +430,8 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;touch-
   function renderAllLevels() {
     renderLevels($('menuLevels'));
     renderLevels($('gameLevels'));
-    $('menuLevelCard').classList.toggle('hidden', S.mode === 'pvp');
-    $('gameLevelWrap').classList.toggle('hidden', S.mode === 'pvp');
+    $('menuLevelCard').classList.toggle('hidden', S.mode === 'pvp' || S.mode === 'online');
+    $('gameLevelWrap').classList.toggle('hidden', S.mode === 'pvp' || S.mode === 'online');
   }
 
   /* ---------- menu ---------- */
@@ -399,11 +463,14 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;touch-
   $('soundToggle').addEventListener('click', function () { S.sound = !S.sound; save('sound', S.sound); sfx.click(); renderMenu(); });
   $('vibeToggle').addEventListener('click', function () { S.vibrate = !S.vibrate; save('vibrate', S.vibrate); vibe(30); renderMenu(); });
   $('soundBtn').addEventListener('click', function () { S.sound = !S.sound; save('sound', S.sound); sfx.click(); renderMenu(); });
-  $('startBtn').addEventListener('click', function () { sfx.click(); vibe(10); startGame(); });
+  $('startBtn').addEventListener('click', function () {
+    sfx.click(); vibe(10);
+    if (S.mode === 'online') window.Online.open();
+    else startGame();
+  });
 
   function show(id) {
-    $('menu').classList.toggle('active', id === 'menu');
-    $('game').classList.toggle('active', id === 'game');
+    ['menu', 'game', 'online'].forEach(function (s) { $(s).classList.toggle('active', s === id); });
   }
 
   /* ---------- game ---------- */
@@ -433,6 +500,7 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;touch-
     $('modeTitle').textContent = MODE_TITLE[S.mode];
     $('nameX').textContent = NAMES[S.mode].X;
     $('nameO').textContent = NAMES[S.mode].O;
+    setOnlineControls(false);
     $('pauseBtn').classList.toggle('hidden', S.mode !== 'cvc');
     $('actions').classList.toggle('three', S.mode === 'cvc');
     renderMenu();
@@ -442,17 +510,21 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;touch-
 
   function newRound() {
     S.token++;
-    S.board = [null, null, null, null, null, null, null, null, null];
     S.turn = S.starter;
     S.over = false;
+    clearBoard();
+    render();
+    scheduleCpu();
+  }
+
+  function clearBoard() {
+    S.board = [null, null, null, null, null, null, null, null, null];
     S.winLine = null;
     $('result').classList.remove('show');
     var wl = $('winLine');
     wl.setAttribute('class', '');
     wl.setAttribute('x1', 0); wl.setAttribute('y1', 0); wl.setAttribute('x2', 0); wl.setAttribute('y2', 0);
     cells.forEach(function (c) { c.className = 'cell empty'; c.innerHTML = ''; });
-    render();
-    scheduleCpu();
   }
 
   function render() {
@@ -483,6 +555,7 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;touch-
   }
 
   function humanMove(i) {
+    if (S.mode === 'online') { window.Online.tap(i); return; }
     if (S.over) { if (S.mode !== 'cvc') newRound(); return; }
     if (isCpu(S.turn) || S.board[i]) return;
     place(i);
@@ -574,8 +647,13 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;touch-
   }
   window.addEventListener('resize', function () { drawWinLine(false); });
 
-  $('againBtn').addEventListener('click', function (e) { e.stopPropagation(); sfx.click(); newRound(); });
-  $('result').addEventListener('click', function () { if (S.mode !== 'cvc') newRound(); });
+  $('againBtn').addEventListener('click', function (e) {
+    e.stopPropagation(); sfx.click();
+    if (S.mode === 'online') window.Online.again();
+    else newRound();
+  });
+  $('homeBtn').addEventListener('click', function (e) { e.stopPropagation(); sfx.click(); window.Online.leave(); });
+  $('result').addEventListener('click', function () { if (S.mode !== 'cvc' && S.mode !== 'online') newRound(); });
   $('newRoundBtn').addEventListener('click', function () { sfx.click(); vibe(10); newRound(); });
   $('resetBtn').addEventListener('click', function () {
     S.scores[S.mode] = [0, 0, 0];
@@ -591,7 +669,10 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;touch-
     render();
     scheduleCpu();
   });
-  $('backBtn').addEventListener('click', function () { goMenu(); });
+  $('backBtn').addEventListener('click', function () {
+    if (S.mode === 'online') { sfx.click(); window.Online.leave(); }
+    else goMenu();
+  });
 
   function goMenu() {
     S.token++;
@@ -603,8 +684,139 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;touch-
 
   // Called by the Android app when the hardware/gesture back is used.
   window.appBack = function () {
-    if ($('game').classList.contains('active')) { goMenu(); return 'handled'; }
+    if ($('game').classList.contains('active')) {
+      if (S.mode === 'online') window.Online.leave();
+      else goMenu();
+      return 'handled';
+    }
+    if ($('online').classList.contains('active')) { window.Online.back(); return 'handled'; }
     return 'exit';
+  };
+
+  /* ---------- online games (the network side is in online.js) ---------- */
+  var EMOJI = ['👋', '👍', '😮', '😂', '🎉'];
+  var OL = { me: 'X', names: { X: '', O: '' }, series: [0, 0, 0], id: 0, done: false, gone: false }; // series: [me, them, draws]
+
+  function setOnlineControls(on) {
+    ['newRoundBtn', 'resetBtn', 'pauseBtn'].forEach(function (id) { $(id).classList.toggle('hidden', on); });
+    $('emojiBar').classList.toggle('hidden', !on);
+    $('homeBtn').classList.toggle('hidden', !on);
+    $('actions').classList.toggle('hidden', on);
+    $('actions').classList.remove('three');
+  }
+
+  $('emojiBar').innerHTML = EMOJI.map(function (e, i) { return '<button data-e="' + i + '">' + e + '</button>'; }).join('');
+  $('emojiBar').addEventListener('click', function (e) {
+    var b = e.target.closest('button');
+    if (b) window.Online.emoji(+b.getAttribute('data-e'));
+  });
+
+  function onlineOpen(o) {
+    S.token++; // stops any computer moves still scheduled
+    S.mode = 'online';
+    S.paused = false;
+    OL.me = o.me;
+    OL.names = o.names;
+    if (!o.keepScore) OL.series = [0, 0, 0];
+    OL.id = 0;
+    $('modeTitle').textContent = o.title;
+    $('nameX').textContent = o.names.X;
+    $('nameO').textContent = o.names.O;
+    setOnlineControls(true);
+    renderAllLevels();
+    show('game');
+  }
+
+  function onlineScores(turn, over) {
+    var mine = OL.series[0], theirs = OL.series[1];
+    $('numX').textContent = OL.me === 'X' ? mine : theirs;
+    $('numO').textContent = OL.me === 'X' ? theirs : mine;
+    $('numD').textContent = OL.series[2];
+    $('scoreX').classList.toggle('turn', !over && turn === 'X');
+    $('scoreO').classList.toggle('turn', !over && turn === 'O');
+  }
+
+  // g is the server's view of the game (see server/api.php view()).
+  function onlineRender(g) {
+    if (g.id !== OL.id) { OL.id = g.id; OL.done = false; OL.gone = false; S.over = false; clearBoard(); }
+    for (var i = 0; i < 9; i++) {
+      var p = g.board.charAt(i);
+      if (p === '.') p = null;
+      if (p === S.board[i]) continue;
+      S.board[i] = p;
+      cells[i].className = p ? 'cell ' + p : 'cell empty';
+      cells[i].innerHTML = p ? (p === 'X' ? XSVG : OSVG) : '';
+      if (p) { sfx[p](); if (p !== OL.me) vibe(12); }
+    }
+    var them = OL.me === 'X' ? 'O' : 'X';
+    var over = g.status !== 'playing';
+    var mine = !over && g.turn === OL.me;
+    S.turn = g.turn;
+    S.over = over;
+    onlineScores(g.turn, over);
+    $('status').className = 'status ' + (over ? '' : g.turn) + (over || mine ? '' : ' think');
+    $('statusText').textContent = over ? 'Round over · राउंड ख़त्म'
+      : mine ? 'Your turn · आपकी बारी' : OL.names[them] + ' is playing…';
+    $('board').classList.toggle('play', mine);
+
+    if (over && !OL.done) { OL.done = true; onlineEnd(g, them); }
+    if (g.status === 'gone' && !OL.gone) {
+      OL.gone = true;
+      $('resultSub').textContent = OL.names[them] + ' left the game · खेल छोड़ दिया';
+      $('againBtn').classList.add('hidden');
+    } else if (g.status === 'over' && g.again) {
+      var again = $('againBtn');
+      again.disabled = g.again.you;
+      again.textContent = g.again.you ? '⏳ Waiting… · रुकिए' : 'PLAY AGAIN · फिर खेलें';
+      if (g.again.opp && !g.again.you) $('resultSub').textContent = '😀 ' + OL.names[them] + ' wants to play again!';
+    }
+  }
+
+  function onlineEnd(g, them) {
+    var w = g.winner, big, sub, cls = '';
+    if (g.status === 'gone') { big = 'BYE BYE 👋'; sub = ''; sfx.draw(); }
+    else if (w === 'D') { OL.series[2]++; big = 'DRAW!'; sub = 'बराबरी · किसी की जीत नहीं'; sfx.draw(); vibe([30, 60, 30]); }
+    else if (w === OL.me) { OL.series[0]++; cls = w; big = 'YOU WIN!'; sub = 'आप जीत गए 🎉'; sfx.win(); vibe([40, 50, 80]); }
+    else { OL.series[1]++; cls = w; big = OL.names[them].toUpperCase() + ' WINS'; sub = 'Try again! · फिर कोशिश करें'; sfx.lose(); vibe(200); }
+    if (g.line) {
+      S.winLine = { p: w, line: g.line };
+      g.line.forEach(function (i) { cells[i].classList.add('win'); });
+      drawWinLine(true);
+    }
+    onlineScores(g.turn, true);
+    $('resultCard').className = 'result-card ' + cls;
+    $('resultMarks').innerHTML = cls ? (cls === 'X' ? XSVG : OSVG) : (g.status === 'gone' ? '' : XSVG + OSVG);
+    $('resultBig').textContent = big;
+    $('resultSub').textContent = sub;
+    var again = $('againBtn');
+    again.classList.toggle('hidden', g.status === 'gone');
+    again.disabled = false;
+    again.textContent = 'PLAY AGAIN · फिर खेलें';
+    var id = OL.id;
+    setTimeout(function () { if (OL.id === id && S.mode === 'online') $('result').classList.add('show'); }, g.line ? 650 : 250);
+  }
+
+  function showEmoji(e, from) {
+    var pop = $('emojiPop');
+    pop.classList.remove('show');
+    pop.innerHTML = e + '<small></small>';
+    pop.querySelector('small').textContent = from;
+    void pop.offsetWidth; // restart the animation
+    pop.classList.add('show');
+    tone(880, 0.08, 'sine', 0, 0.08);
+  }
+
+  window.TTTUI = {
+    show: show,
+    sfx: sfx,
+    vibe: vibe,
+    emoji: EMOJI,
+    onlineOpen: onlineOpen,
+    onlineRender: onlineRender,
+    showEmoji: showEmoji,
+    onlineNet: function (ok) { if (!ok && !S.over) $('statusText').textContent = '📶 Connecting… · जुड़ रहे हैं'; },
+    menu: function () { S.token++; renderMenu(); show('menu'); },
+    playComputer: function () { S.mode = 'pvc'; save('mode', 'pvc'); startGame(); }
   };
 
   // Pause the computer-vs-computer show when the app goes to background.
@@ -620,5 +832,6 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;touch-
   renderMenu();
 })();
 </script>
+<script src="online.js"></script>
 </body>
 </html>
