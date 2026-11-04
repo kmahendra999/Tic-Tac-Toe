@@ -1,11 +1,11 @@
-# Builds dist/TicTacToe.apk (direct install) and dist/TicTacToy.aab (Google Play upload)
+﻿# Builds dist/TicTacToe.apk (direct install) and dist/TicTacToy.aab (Google Play upload)
 # without Gradle, straight from the Android SDK tools.
 # Usage:  powershell -ExecutionPolicy Bypass -File build-apk.ps1
 $ErrorActionPreference = 'Stop'
 Set-Location $PSScriptRoot
 
-$VersionCode = 1
-$VersionName = '1.0'
+$VersionCode = 2
+$VersionName = '1.0.1'
 $MinSdk = 24
 $TargetSdk = 36
 
@@ -31,7 +31,7 @@ Remove-Item -Recurse -Force build -ErrorAction SilentlyContinue
 New-Item -ItemType Directory -Force build\assets, build\classes, build\dex, dist | Out-Null
 
 # ---- 1. game files -> assets ----
-Copy-Item web\index.html, web\game.js build\assets\
+Copy-Item web\index.html, web\game.js, docs\privacy-policy.html build\assets\
 
 # ---- 2. legacy PNG icons (once) ----
 if (-not (Test-Path android\res\mipmap-xxxhdpi\ic_launcher.png)) {
