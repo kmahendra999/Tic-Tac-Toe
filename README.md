@@ -49,9 +49,8 @@ signed with this same upload key. If both are missing, the script creates a new 
 
 Everything to copy into the Play Console is in [`store/listing.md`](store/listing.md).
 
-- **Privacy policy:** on GitHub, open the repository's Settings → Pages, choose *Deploy from a branch*, branch `main`,
-  folder `/docs`. The policy is then at https://kmahendra999.github.io/Tic-Tac-Toe/privacy-policy.html
-  (the repository must be public).
+- **Privacy policy:** https://androidapps.vidiaplus.com/tictactoy/privacy-policy.html, served by the game server.
+  `node server/deploy.mjs` publishes the copy of `docs/privacy-policy.html` from `main`.
 - **Screenshots:** `node tools/screenshots.js` re-captures them after UI changes (needs Chrome or Edge).
 
 ## Play in a browser

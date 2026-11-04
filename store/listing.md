@@ -61,8 +61,8 @@ Made with ❤ by Kunal.
 - **Tags:** Board, Casual, Offline, Single player, Multiplayer (local)
 - **Free or paid:** Free
 - **Contact email:** k.mahendra999@hotmail.com
-- **Privacy policy URL:** https://kmahendra999.github.io/Tic-Tac-Toe/privacy-policy.html
-  (works once GitHub Pages is on for the repository - see README)
+- **Privacy policy URL:** https://androidapps.vidiaplus.com/tictactoy/privacy-policy.html
+  (served by the game server; `node server/deploy.mjs` publishes the copy from `main`)
 
 ## App content answers (Policy > App content)
 
@@ -72,7 +72,7 @@ Made with ❤ by Kunal.
 | Ads | **No**, the app does not contain ads |
 | App access | All functionality is available without special access (no login) |
 | Content rating | Category: Game. Answer **No** to every violence, fear, sexuality, language, drugs, gambling and user-interaction question. Expected rating: Everyone / PEGI 3 / IARC 3+ |
-| Target audience | Ages 6-8, 9-12, 13-15, 16-17, 18+ (including children means Google's Families policy applies - the app already meets it: no ads, no data collection) |
+| Target audience | All ages: 5 and under, 6-8, 9-12, 13-15, 16-17, 18+ (including children means Google's Families policy applies - the app already meets it: no ads, no data collection) |
 | Data safety | **Does your app collect or share any of the required user data types? → No.** Settings and scores stay on the device and are never sent anywhere |
 | Government apps | No |
 | Financial features | No |

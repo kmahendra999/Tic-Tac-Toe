@@ -4,7 +4,7 @@
 $ErrorActionPreference = 'Stop'
 Set-Location $PSScriptRoot
 
-$VersionCode = 2
+$VersionCode = 3
 $VersionName = '1.1'
 $MinSdk = 24
 $TargetSdk = 36
@@ -31,7 +31,7 @@ Remove-Item -Recurse -Force build -ErrorAction SilentlyContinue
 New-Item -ItemType Directory -Force build\assets, build\classes, build\dex, dist | Out-Null
 
 # ---- 1. game files -> assets ----
-Copy-Item web\index.html, web\game.js, web\online.js build\assets\
+Copy-Item web\index.html, web\game.js, web\online.js, docs\privacy-policy.html build\assets\
 
 # ---- 2. legacy PNG icons (once) ----
 if (-not (Test-Path android\res\mipmap-xxxhdpi\ic_launcher.png)) {

@@ -3,6 +3,7 @@
 // Needs CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID in the environment (never stored in this repository).
 // Usage: node server/deploy.mjs
 import fs from 'node:fs';
+import { execSync } from 'node:child_process';
 
 const WORKER = 'tictactoy';
 const DATABASE = 'tictactoy';
@@ -48,7 +49,11 @@ form.append('metadata', new Blob([JSON.stringify({
   compatibility_date: COMPATIBILITY_DATE,
   bindings: [{ type: 'd1', name: 'DB', id: dbId }]
 })], { type: 'application/json' }));
-form.append('worker.mjs', new Blob([read('./worker.mjs')], { type: 'application/javascript+module' }), 'worker.mjs');
+// the policy on main is the one that matches the released app
+const policy = execSync('git show main:docs/privacy-policy.html', { encoding: 'utf8' });
+const code = read('./worker.mjs').replace('const PAGES = {};',
+  () => `const PAGES = ${JSON.stringify({ '/tictactoy/privacy-policy.html': policy })};`);
+form.append('worker.mjs', new Blob([code], { type: 'application/javascript+module' }), 'worker.mjs');
 await cf('PUT', `/accounts/${account}/workers/scripts/${WORKER}`, form, true);
 console.log(`worker ${WORKER} uploaded`);
 

@@ -79,6 +79,11 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;touch-
   color:#0b0d12;background:linear-gradient(90deg,var(--blue-hi),var(--yellow));
   box-shadow:0 6px 24px rgba(46,134,255,.25)}
 .primary:active{transform:scale(.98)}
+.policy-link{align-self:center;padding:6px 10px;font-size:13px;color:var(--muted);text-decoration:underline}
+#policy{position:fixed;inset:0;z-index:50;display:none;flex-direction:column;background:var(--bg)}
+#policy.open{display:flex}
+#policy iframe{flex:1;width:100%;border:0;background:#fff}
+#policyClose{margin:10px;width:auto}
 
 /* ---------- game ---------- */
 .game-wrap{width:100%;max-width:1100px;flex:1;display:flex;flex-direction:column;gap:10px;min-height:0}
@@ -271,8 +276,15 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;touch-
     </div>
 
     <button class="primary" id="startBtn">START · शुरू करें</button>
+    <button class="policy-link" id="policyBtn">Privacy policy</button>
   </div>
 </section>
+
+<!-- ============ PRIVACY POLICY (bundled with the app, needs no internet) ============ -->
+<div id="policy">
+  <iframe id="policyFrame" title="Privacy policy"></iframe>
+  <button class="primary" id="policyClose">Close · बंद करें</button>
+</div>
 
 <!-- ============ ONLINE (pages drawn by online.js) ============ -->
 <section id="online" class="screen">
@@ -463,6 +475,12 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;touch-
   $('soundToggle').addEventListener('click', function () { S.sound = !S.sound; save('sound', S.sound); sfx.click(); renderMenu(); });
   $('vibeToggle').addEventListener('click', function () { S.vibrate = !S.vibrate; save('vibrate', S.vibrate); vibe(30); renderMenu(); });
   $('soundBtn').addEventListener('click', function () { S.sound = !S.sound; save('sound', S.sound); sfx.click(); renderMenu(); });
+  $('policyBtn').addEventListener('click', function () {
+    $('policyFrame').src = 'privacy-policy.html';
+    $('policy').classList.add('open');
+  });
+  $('policyClose').addEventListener('click', function () { $('policy').classList.remove('open'); });
+
   $('startBtn').addEventListener('click', function () {
     sfx.click(); vibe(10);
     if (S.mode === 'online') window.Online.open();
@@ -684,6 +702,7 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;touch-
 
   // Called by the Android app when the hardware/gesture back is used.
   window.appBack = function () {
+    if ($('policy').classList.contains('open')) { $('policy').classList.remove('open'); return 'handled'; }
     if ($('game').classList.contains('active')) {
       if (S.mode === 'online') window.Online.leave();
       else goMenu();

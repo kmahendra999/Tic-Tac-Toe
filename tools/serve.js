@@ -10,8 +10,10 @@ const types = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; ch
 
 http.createServer((req, res) => {
   const rel = decodeURIComponent(req.url.split('?')[0]).replace(/^\/+/, '') || 'index.html';
-  const file = path.normalize(path.join(root, rel));
-  if (!file.startsWith(root)) { res.writeHead(403); return res.end(); }
+  // the app bundles the policy from docs/ (see build-apk.ps1)
+  const base = rel === 'privacy-policy.html' ? path.join(root, '..', 'docs') : root;
+  const file = path.normalize(path.join(base, rel));
+  if (!file.startsWith(base)) { res.writeHead(403); return res.end(); }
   fs.readFile(file, (err, data) => {
     if (err) { res.writeHead(404); return res.end('not found'); }
     res.writeHead(200, { 'Content-Type': types[path.extname(file)] || 'application/octet-stream', 'Cache-Control': 'no-store' });

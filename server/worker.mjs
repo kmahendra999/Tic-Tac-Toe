@@ -33,10 +33,17 @@ function json(data, status) {
   });
 }
 
+// path -> html, filled in by deploy.mjs (the privacy policy the Play listing links to)
+const PAGES = {};
+
 export default {
   async fetch(request, env, ctx) {
     if (request.method === 'OPTIONS') return new Response(null, { headers: CORS });
-    if (request.method !== 'POST') return json({ ok: true, service: 'tic-tac-toy' });
+    if (request.method !== 'POST') {
+      const page = PAGES[new URL(request.url).pathname];
+      if (page) return new Response(page, { headers: { 'Content-Type': 'text/html; charset=utf-8' } });
+      return json({ ok: true, service: 'tic-tac-toy' });
+    }
     let input;
     try { input = await request.json(); } catch (e) { input = null; }
     if (!input || typeof input !== 'object' || Array.isArray(input)) return json({ ok: false, error: 'bad' }, 400);
