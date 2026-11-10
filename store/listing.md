@@ -10,16 +10,20 @@ Copy-paste text for the Play Console. Limits are Google's; character counts are 
 Tic-Tac-Toy by Kunal
 ```
 
+Google Play's metadata policy does not allow price or promo words such as "free", "ad-free" or "no ads" in the
+app name, icon, short description, feature graphic or screenshots. "No ads" goes at the top of the full description.
+
 **Short description** (80 max)
 
 ```
-Ads-free Tic Tac Toe! Play a friend or the computer at 5 levels. No tracking.
+Tic Tac Toe for the whole family: play a friend or the computer at 5 levels.
 ```
 
 **Full description** (4000 max)
 
 ```
-Tic-Tac-Toy is a simple, colourful Tic Tac Toe game made by Kunal - with no ads, no pop-ups and no tracking. Just tap and play.
+NO ADS. No pop-ups, no tracking - just tap and play!
+Tic-Tac-Toy is a simple, colourful Tic Tac Toe game made by Kunal.
 
 THREE WAYS TO PLAY
 • You vs Computer - test yourself against the computer

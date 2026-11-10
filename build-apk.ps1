@@ -4,7 +4,7 @@
 $ErrorActionPreference = 'Stop'
 Set-Location $PSScriptRoot
 
-$VersionCode = 3
+$VersionCode = 4
 $VersionName = '1.1'
 $MinSdk = 24
 $TargetSdk = 36
