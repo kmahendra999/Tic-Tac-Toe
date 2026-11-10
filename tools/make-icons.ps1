@@ -1,13 +1,14 @@
-# Builds every app icon from one square picture (art/icon-source.jpg):
+# Builds every app icon: the name TIC TAC TOY in big letters, with Kunal's picture (art/icon-source.jpg)
+# as a small round badge in the bottom-right corner.
 #   - legacy launcher PNGs (Android 7.x)       -> res/mipmap-*/ic_launcher.png
-#   - adaptive icon foreground (Android 8+)     -> res/mipmap-*/ic_launcher_foreground.png
+#   - adaptive icon foreground (Android 8+)     -> res/mipmap-*/ic_launcher_foreground.png (background: @color/icon_bg)
 #   - Play Store icon 512x512 + feature graphic -> store/
-# Re-run after replacing art/icon-source.jpg (a 1024x1024 source gives the sharpest result).
+# Store graphics must not carry price or promo words ("free", "no ads"): Google Play metadata policy.
 param(
     [string]$Source = (Join-Path $PSScriptRoot '..\art\icon-source.jpg'),
     [string]$ResDir = (Join-Path $PSScriptRoot '..\android\res'),
     [string]$StoreDir = (Join-Path $PSScriptRoot '..\store'),
-    [double]$FgScale = 0.62   # picture size as a share of the 108dp adaptive canvas (keeps the corners inside a round mask)
+    [double]$FgScale = 0.6    # icon art as a share of the 108dp adaptive canvas (keeps the badge inside a round mask)
 )
 
 Add-Type -AssemblyName System.Drawing
@@ -44,31 +45,55 @@ function Save-Png($bmp, [string]$dir, [string]$name) {
     $bmp.Save((Join-Path $dir $name), [System.Drawing.Imaging.ImageFormat]::Png)
 }
 
+# The icon art on a 1024 square, transparent unless -Background is given: TIC / TAC / TOY on three lines,
+# Kunal's picture in a yellow ring at the bottom right (kept inside the round launcher mask).
+function New-IconArt([switch]$Background) {
+    $n = 1024
+    $bmp, $g = New-Canvas $n $n
+    if ($Background) { $g.Clear($dark) }
+    $f = New-Object System.Drawing.Font 'Segoe UI Black', 236, ([System.Drawing.FontStyle]::Bold), ([System.Drawing.GraphicsUnit]::Pixel)
+    $x = 66
+    $g.DrawString('TIC', $f, (New-Object System.Drawing.SolidBrush $blue), $x, 40)
+    $g.DrawString('TAC', $f, (New-Object System.Drawing.SolidBrush $yellow), $x, 300)
+    $g.DrawString('TOY', $f, [System.Drawing.Brushes]::White, $x, 560)
+    $d = 280; $bx = 664; $by = 664
+    $g.FillEllipse((New-Object System.Drawing.SolidBrush $yellow), $bx - 14, $by - 14, $d + 28, $d + 28)
+    $clip = New-Object System.Drawing.Drawing2D.GraphicsPath
+    $clip.AddEllipse($bx, $by, $d, $d)
+    $g.SetClip($clip)
+    $g.DrawImage($src, $bx, $by, $d, $d)
+    $g.Dispose()
+    return $bmp
+}
+
+$art = New-IconArt -Background
+$fg = New-IconArt
+
 $densities = [ordered]@{ 'mipmap-mdpi' = 1.0; 'mipmap-hdpi' = 1.5; 'mipmap-xhdpi' = 2.0; 'mipmap-xxhdpi' = 3.0; 'mipmap-xxxhdpi' = 4.0 }
 
 foreach ($dir in $densities.Keys) {
     $d = $densities[$dir]
 
-    # legacy icon: 48dp picture with rounded corners
+    # legacy icon: 48dp art with rounded corners
     $n = [int](48 * $d)
     $bmp, $g = New-Canvas $n $n
     $g.SetClip((RoundRect 0 0 $n $n ($n * 0.2)))
-    $g.DrawImage($src, 0, 0, $n, $n)
+    $g.DrawImage($art, 0, 0, $n, $n)
     Save-Png $bmp (Join-Path $ResDir $dir) 'ic_launcher.png'
     $g.Dispose(); $bmp.Dispose()
 
-    # adaptive foreground: 108dp canvas, picture centred; the launcher mask shows the middle 72dp
+    # adaptive foreground: 108dp canvas, art centred; the launcher mask shows the middle 72dp
     $n = [int](108 * $d)
     $s = [int]($n * $FgScale); $o = [int](($n - $s) / 2)
     $bmp, $g = New-Canvas $n $n
-    $g.DrawImage($src, $o, $o, $s, $s)
+    $g.DrawImage($fg, $o, $o, $s, $s)
     Save-Png $bmp (Join-Path $ResDir $dir) 'ic_launcher_foreground.png'
     $g.Dispose(); $bmp.Dispose()
 }
 
 # Play Store icon: 512x512, full square (Play applies its own rounding)
 $bmp, $g = New-Canvas 512 512
-$g.DrawImage($src, 0, 0, 512, 512)
+$g.DrawImage($art, 0, 0, 512, 512)
 Save-Png $bmp $StoreDir 'play-icon-512.png'
 $g.Dispose(); $bmp.Dispose()
 
@@ -86,9 +111,9 @@ $w1 = $g.MeasureString('TIC ', $f1).Width
 $g.DrawString('TAC', $f1, (New-Object System.Drawing.SolidBrush $yellow), $x + $w1, 150)
 $w2 = $g.MeasureString('TAC ', $f1).Width
 $g.DrawString('TOY', $f1, [System.Drawing.Brushes]::White, $x + $w1 + $w2, 150)
-$g.DrawString('Ads-free game by Kunal', $f2, (New-Object System.Drawing.SolidBrush ([System.Drawing.Color]::FromArgb(255, 139, 151, 171))), ($x + 4), 250)
+$g.DrawString('A game by Kunal', $f2, (New-Object System.Drawing.SolidBrush ([System.Drawing.Color]::FromArgb(255, 139, 151, 171))), ($x + 4), 250)
 Save-Png $bmp $StoreDir 'feature-graphic-1024x500.png'
 $g.Dispose(); $bmp.Dispose()
 
-$src.Dispose()
+$art.Dispose(); $fg.Dispose(); $src.Dispose()
 Write-Host "Icons written to $ResDir and $StoreDir"
