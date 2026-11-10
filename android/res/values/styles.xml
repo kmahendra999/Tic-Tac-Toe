@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="bg">#FF06080C</color>
-    <color name="icon_bg">#FFFFFFFF</color>
+    <color name="icon_bg">#FF06080C</color>
 
     <style name="AppTheme" parent="@android:style/Theme.Material.NoActionBar">
         <item name="android:windowBackground">@color/bg</item>
