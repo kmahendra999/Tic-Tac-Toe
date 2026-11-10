@@ -23,6 +23,9 @@ node server/deploy.mjs
 
 Running it again is safe: it keeps the database and only uploads the new Worker code.
 
+After Google Play approves a new app version, raise `LATEST_APP` in `worker.mjs` to its version code and deploy.
+Older online-capable apps (1.1 and later) then show "Update available" with Update and Skip on start.
+
 ## Test
 
 ```bash
