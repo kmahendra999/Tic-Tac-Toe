@@ -33,6 +33,10 @@ function json(data, status) {
   });
 }
 
+// Newest Android version code live on Google Play. Apps with a lower one offer "Update / Skip" on start
+// (web/online.js). Raise it only after a release has been approved, then deploy.
+const LATEST_APP = 3;
+
 // path -> html, filled in by deploy.mjs (the privacy policy the Play listing links to)
 const PAGES = {};
 
@@ -42,7 +46,7 @@ export default {
     if (request.method !== 'POST') {
       const page = PAGES[new URL(request.url).pathname];
       if (page) return new Response(page, { headers: { 'Content-Type': 'text/html; charset=utf-8' } });
-      return json({ ok: true, service: 'tic-tac-toy' });
+      return json({ ok: true, service: 'tic-tac-toy', latest: LATEST_APP });
     }
     let input;
     try { input = await request.json(); } catch (e) { input = null; }

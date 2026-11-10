@@ -476,7 +476,23 @@
     if (P.me) { home(); refreshMe(); } else open();
   }
 
+  /* ---------- app updates ---------- */
+
+  // The server says which Android version is newest on Google Play (LATEST_APP in worker.mjs). If this app is
+  // older, ask once per new version: Update opens Google Play, Skip stays quiet until the next version.
+  function checkUpdate() {
+    var app = window.AndroidApp;
+    if (!app || !app.versionCode) return;
+    fetch(SERVER).then(function (r) { return r.json(); }).then(function (j) {
+      if (j.latest > app.versionCode() && load('skipped', 0) !== j.latest) {
+        UI.askUpdate(function () { app.openStore(); }, function () { save('skipped', j.latest); });
+      }
+    }).catch(function () {});
+  }
+  checkUpdate();
+
   window.Online = {
+    checkUpdate: checkUpdate,
     open: open,
     tap: tap,
     again: again,

@@ -84,6 +84,15 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;touch-
 #policy.open{display:flex}
 #policy iframe{flex:1;width:100%;border:0;background:#fff}
 #policyClose{margin:10px;width:auto}
+#update{position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;
+  padding:16px;background:rgba(0,0,0,.72)}
+#update.open{display:flex}
+#update .card{width:100%;max-width:380px;display:flex;flex-direction:column;gap:12px;text-align:center}
+#update .up-ic{font-size:56px;line-height:1}
+#update h2{margin:0;font-size:24px}
+#update p{margin:0;color:var(--muted)}
+#skipBtn{padding:14px;border-radius:16px;border:1px solid var(--line);background:none;color:var(--text);
+  font-size:17px;font-weight:800}
 
 /* ---------- game ---------- */
 .game-wrap{width:100%;max-width:1100px;flex:1;display:flex;flex-direction:column;gap:10px;min-height:0}
@@ -286,6 +295,17 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;touch-
   <button class="primary" id="policyClose">Close · बंद करें</button>
 </div>
 
+<!-- ============ UPDATE AVAILABLE (shown by online.js when Google Play has a newer version) ============ -->
+<div id="update">
+  <div class="card">
+    <div class="up-ic">🎁</div>
+    <h2>Update available</h2>
+    <p>A new version of Tic-Tac-Toy is ready. · नया वर्ज़न आया है</p>
+    <button class="primary" id="updateBtn">Update · अपडेट करें</button>
+    <button id="skipBtn">Skip · अभी नहीं</button>
+  </div>
+</div>
+
 <!-- ============ ONLINE (pages drawn by online.js) ============ -->
 <section id="online" class="screen">
   <div class="on-wrap" id="onlinePage"></div>
@@ -480,6 +500,13 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;touch-
     $('policy').classList.add('open');
   });
   $('policyClose').addEventListener('click', function () { $('policy').classList.remove('open'); });
+
+  // "Update available" box; online.js decides when to show it
+  function askUpdate(onUpdate, onSkip) {
+    $('update').classList.add('open');
+    $('updateBtn').onclick = function () { $('update').classList.remove('open'); onUpdate(); };
+    $('skipBtn').onclick = function () { $('update').classList.remove('open'); onSkip(); };
+  }
 
   $('startBtn').addEventListener('click', function () {
     sfx.click(); vibe(10);
@@ -703,6 +730,7 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;touch-
   // Called by the Android app when the hardware/gesture back is used.
   window.appBack = function () {
     if ($('policy').classList.contains('open')) { $('policy').classList.remove('open'); return 'handled'; }
+    if ($('update').classList.contains('open')) { $('update').classList.remove('open'); return 'handled'; }
     if ($('game').classList.contains('active')) {
       if (S.mode === 'online') window.Online.leave();
       else goMenu();
@@ -826,6 +854,7 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;touch-
   }
 
   window.TTTUI = {
+    askUpdate: askUpdate,
     show: show,
     sfx: sfx,
     vibe: vibe,

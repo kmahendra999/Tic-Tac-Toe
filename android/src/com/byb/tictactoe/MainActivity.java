@@ -1,8 +1,10 @@
 package com.byb.tictactoe;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Insets;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -79,8 +81,33 @@ public class MainActivity extends Activity {
         else web.loadUrl("file:///android_asset/index.html");
     }
 
-    /** Called from the game as AndroidApp.share(text): opens the share sheet to send an invite code. */
+    /** Called from the game as AndroidApp.*: the share sheet for invite codes, and the update check. */
     private class AppBridge {
+        @JavascriptInterface
+        public int versionCode() {
+            try {
+                return getPackageManager().getPackageInfo(getPackageName(), 0).versionCode;
+            } catch (Exception e) {
+                return 0;
+            }
+        }
+
+        /** Opens this app's page in the Play Store app (or on the web if the Play Store app is missing). */
+        @JavascriptInterface
+        public void openStore() {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + getPackageName())));
+                    } catch (ActivityNotFoundException e) {
+                        startActivity(new Intent(Intent.ACTION_VIEW,
+                                Uri.parse("https://play.google.com/store/apps/details?id=" + getPackageName())));
+                    }
+                }
+            });
+        }
+
         @JavascriptInterface
         public void share(final String text) {
             runOnUiThread(new Runnable() {
