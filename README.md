@@ -14,9 +14,9 @@ Download [`dist/TicTacToe.apk`](dist/TicTacToe.apk), open it on the device and a
 
 | Path | Contents |
 | --- | --- |
-| `web/` | The game: `index.html` (UI) and `game.js` (rules and computer player) |
+| `web/` | `index.html` (home screen, Tic Tac Toe screens, shared `GameKit`), `game.js` (Tic Tac Toe rules), `snakes.js`, `ludo.js`, `cards.js` (each game's rules, computer player and screen) |
 | `android/` | Android wrapper: manifest, resources, `MainActivity.java` (WebView) |
-| `tests/` | Logic tests: `node tests/game.test.js` |
+| `tests/` | Logic tests: `node tests/game.test.js` (Tic Tac Toe), `node tests/boardgames.test.js` (the other three) |
 | `tools/` | `serve.js` (local preview server), `make-icons.ps1` (launcher + store icons from `art/icon-source.jpg`), `screenshots.js` (store screenshots) |
 | `art/` | `icon-source.jpg`, the picture every icon is made from |
 | `store/` | Google Play listing: `listing.md` (texts and form answers), icon, feature graphic, `screenshots/` |

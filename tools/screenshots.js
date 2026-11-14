@@ -21,24 +21,33 @@ const DEVICES = [
 
 const click = (sel, i = 0) => `document.querySelectorAll(${JSON.stringify(sel)})[${i}].click()`;
 const cell = (i) => click('.cell', i);
+const open = (game) => click(`[data-game="${game}"]`);
+const rolls = (list) => `GameKit.forced = ${JSON.stringify(list)}`;   // fixed dice so every capture looks the same
+const allCpu = { count: 4, cpu: [true, true, true, true] };
+const noToast = "document.getElementById('toast').classList.remove('show')";   // keep pop-up messages off the board
 
 // Each scene: saved settings, then steps (JS to run, or a number = wait ms).
 const SCENES = [
-  { file: '1-menu', store: { mode: 'pvc', levels: { cpu: 3, cpuX: 2, cpuO: 5 } }, steps: [400] },
+  { file: '1-home', store: {}, steps: [400] },
   {
-    file: '2-vs-computer',
+    file: '2-snakes-ladders',
+    store: { 'snl.players': allCpu },
+    steps: [open('snakes'), 200, rolls([4, 5, 6, 2, 3, 6, 4, 1, 5, 3, 2, 6, 3]), click('#snakes [data-act="start"]'), 15500, noToast, 250]
+  },
+  {
+    file: '3-ludo',
+    store: { 'ludo.players': allCpu },
+    steps: [open('ludo'), 200, rolls([6, 4, 6, 3, 6, 5, 6, 2, 3, 5, 6, 1, 4, 2, 5, 6, 3, 4]), click('#ludo [data-act="start"]'), 17000, noToast, 250]
+  },
+  {
+    file: '4-color-cards',
+    store: { 'cards.players': { count: 3, cpu: [false, true, true, true] } },
+    steps: [open('cards'), 200, click('#cards [data-act="start"]'), 600]
+  },
+  {
+    file: '5-tic-tac-toe',
     store: { mode: 'pvc', levels: { cpu: 3, cpuX: 2, cpuO: 5 }, scores: { pvc: [3, 1, 2], pvp: [0, 0, 0], cvc: [0, 0, 0] } },
-    steps: [click('#startBtn'), 300, cell(4), 900, () => firstEmpty([0, 2, 6, 8]), 1100]
-  },
-  {
-    file: '3-two-players-win',
-    store: { mode: 'pvp', scores: { pvc: [0, 0, 0], pvp: [2, 1, 1], cvc: [0, 0, 0] } },
-    steps: [click('#startBtn'), 300, cell(0), 150, cell(1), 150, cell(4), 150, cell(2), 150, cell(8), 1800]
-  },
-  {
-    file: '4-computer-vs-computer',
-    store: { mode: 'cvc', levels: { cpu: 3, cpuX: 2, cpuO: 5 }, scores: { pvc: [0, 0, 0], pvp: [0, 0, 0], cvc: [1, 2, 4] } },
-    steps: [click('#startBtn'), 2350]
+    steps: [open('ttt'), 200, click('#startBtn'), 300, cell(4), 900, () => firstEmpty([0, 2, 6, 8]), 1100]
   }
 ];
 

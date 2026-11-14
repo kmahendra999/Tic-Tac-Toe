@@ -7,35 +7,38 @@ Copy-paste text for the Play Console. Limits are Google's; character counts are 
 **App name** (30 max)
 
 ```
-Tic-Tac-Toy by Kunal
+Tic-Tac-Toy: Games by Kunal
 ```
+
+Google Play's metadata policy does not allow price or promo words such as "free", "ad-free" or "no ads" in the
+app name, icon, short description, feature graphic or screenshots. "No ads" goes at the top of the full description.
 
 **Short description** (80 max)
 
 ```
-Ads-free Tic Tac Toe! Play a friend or the computer at 5 levels. No tracking.
+Tic Tac Toe, Snakes & Ladders, Ludo and Color Cards for the whole family.
 ```
 
 **Full description** (4000 max)
 
 ```
-Tic-Tac-Toy is a simple, colourful Tic Tac Toe game made by Kunal - with no ads, no pop-ups and no tracking. Just tap and play.
+NO ADS. No pop-ups, no tracking - just tap and play!
+Tic-Tac-Toy is a box of four classic games made by Kunal, for kids, parents and grandparents.
 
-THREE WAYS TO PLAY
-• You vs Computer - test yourself against the computer
-• 2 Players - pass the phone or tablet and play a friend
-• Computer vs Computer - sit back and watch two computers battle it out
+FOUR GAMES IN ONE
+• Tic Tac Toe - play the computer, a friend, or watch two computers play
+• Snakes & Ladders - climb the ladders, dodge the snakes, first to 100 wins
+• Ludo - roll a 6 to come out, capture the others and race your four tokens home
+• Color Cards - match the colour or the number, use the Rainbow card, and be the first with no cards left
 
-FIVE DIFFICULTY LEVELS
-Easy, Normal, Medium, Hard and Impossible. Start easy and work your way up - can you beat the computer on Hard? On Impossible, the best you can hope for is a draw!
-You can change the level from the menu or right in the middle of a game.
+PLAY YOUR WAY
+• 2 to 4 players on one phone or tablet, or play against the computer
+• Computer levels from Easy to Impossible - gentle for a 5-year-old, a real challenge for grown-ups
+• Big buttons, bright colours and simple words in English and Hindi
 
 MADE FOR EVERYONE
-• Bold black, blue and yellow design that is easy on the eyes
 • Works on phones and tablets, in portrait and landscape
-• Score board for X, O and draws
 • Sound and vibration you can switch on or off
-• Menu labels in English and Hindi
 • Works completely offline - no internet needed
 
 100% ADS-FREE AND PRIVATE
@@ -61,8 +64,8 @@ Made with ❤ by Kunal.
 - **Tags:** Board, Casual, Offline, Single player, Multiplayer (local)
 - **Free or paid:** Free
 - **Contact email:** k.mahendra999@hotmail.com
-- **Privacy policy URL:** https://kmahendra999.github.io/Tic-Tac-Toe/privacy-policy.html
-  (works once GitHub Pages is on for the repository - see README)
+- **Privacy policy URL:** https://androidapps.vidiaplus.com/tictactoy/privacy-policy.html
+  (served by the game server; `node server/deploy.mjs` on the online-play branch publishes the copy from `main`)
 
 ## App content answers (Policy > App content)
 
