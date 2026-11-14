@@ -1,10 +1,13 @@
 # Tic-Tac-Toy : Ads free game by Kunal
 
-A 3x3 Tic Tac Toe game for Android phones and tablets, in black, blue and yellow. No ads, no tracking.
+Four family games for Android phones and tablets, in black, blue and yellow. No ads, no tracking, works offline.
 
-- **Modes:** Player vs Computer, 2 Players, Computer vs Computer
-- **Difficulty:** 5 levels (Easy, Normal, Medium, Hard, Impossible), adjustable from the menu or during play
-- **Extras:** score tracking, sound, vibration, portrait and landscape layouts
+- **Tic Tac Toe:** Player vs Computer, 2 Players, Computer vs Computer; 5 levels, adjustable during play
+- **Snakes & Ladders:** 2-4 players, each a child or the computer; our own board layout
+- **Ludo:** 2-4 players; 6 to come out, captures, star squares, extra roll on 6 / capture / home
+- **Color Cards:** our own match-the-colour-or-number card game (you vs 1-3 computers), Rainbow wild cards
+- **Computer levels:** Easy, Normal, Medium, Hard, Impossible for Ludo and Color Cards too
+- **Extras:** sound, vibration, English and Hindi labels, portrait and landscape layouts
 
 ## Install
 
